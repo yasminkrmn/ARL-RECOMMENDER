@@ -1,23 +1,11 @@
 ############################################
-# Proje: Association Rule Learning Recommender
+# Project: Association Rule Learning Recommender
 ############################################
 
 
-# Amaç: Sepet Aşamasındaki Kullanıcılara Ürün Önerisinde Bulunmak
-
-# Aşağıda 3 farklı kullanıcının sepet bilgileri verilmiştir.
-# Bu sepet bilgilerine en uygun ürün önerisini yapınız.
-
-# Not: Ürün önerileri 1 tane ya da 1'den fazla olabilir.
-# Önemli not: Karar kurallarını 2010-2011 Germany müşterileri üzerinden türetiniz.
-
-# Kullanıcı 1 ürün id'si: 21987
-# Kullanıcı 2 ürün id'si: 23235
-# Kullanıcı 3 ürün id'si: 22747
-
 
 ############################################
-# Gerekli Kütüphane ve Fonksiyonlar
+# Required Library and Functions
 ############################################
 
 import pandas as pd
@@ -56,12 +44,10 @@ def arl_recommender(rules_df, product_id, rec_count=1):
 
 
 ############################################
-# Görev 1: Veri Ön İşleme İşlemlerini Gerçekleştiriniz
+# 1: Data Preprocessing
 ############################################
 
-# Online retail II veri seti için ön işleme işlemlerini gerçekleştiriniz.
-# Önemli not! 2010-2011 verilerilerini seçiniz ve tüm veriyi ön işlemeden geçiriniz.
-# (Germany seçimi sonraki basamakta olacaktır.)
+# Online retail II data set
 
 df_ = pd.read_excel("datasets/online_retail_II.xlsx", sheet_name="Year 2010-2011")
 df = df_.copy()
@@ -70,7 +56,7 @@ df = retail_data_prep(df)
 check_df(df)
 
 ############################################
-# Görev 2: Germany Müşterileri Üzerinden Birliktelik Kuralları Üretiniz
+# 2: Produce Association Rules for Germany Customers
 ############################################
 
 rules_grm = create_rules(df, country="Germany")
@@ -82,7 +68,7 @@ rules_grm = create_rules(df, country="Germany")
 # conviction: Y olmadan X'in beklenen frekansı
 
 ############################################
-# Görev 3: ID'leri verilen ürünlerin isimleri nelerdir?
+# 3: What are the names of the products whose IDs are given?
 ############################################
 
 check_id(df, 21987)
@@ -94,7 +80,7 @@ check_id(df, 22747)
 
 
 ############################################
-# Görev 4: Sepetteki Kullanıcılar için Ürün Önerisi Yapınız
+# 4: Make a Product Recommendation for Users in the Cart
 ############################################
 
 # Kullanıcı 1 ürün id'si: 21987
@@ -107,7 +93,7 @@ arl_recommender(rules_grm, 22747, 1)
 
 
 ############################################
-# Görev 5: Önerilen Ürünlerin İsimleri Nelerdir?
+# 5: What are the Names of the Recommended Products?
 ############################################
 
 check_id(df, arl_recommender(rules_grm, 21987, 1)[0])
